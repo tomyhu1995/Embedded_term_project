@@ -29,7 +29,7 @@ void message_callback(struct mosquitto *mosq, void *obj, const struct mosquitto_
 	char time_stamp[100] = {0};
 	char filepath[200] = {0};
 	sprintf(time_stamp, "%d-%d-%d,%d:%d:%d", (p_tm->tm_year+1900), (p_tm->tm_mon+1), p_tm->tm_mday, p_tm->tm_hour+8, p_tm->tm_min, p_tm->tm_sec);
-	sprintf(filepath, "alert_%s.txt", time_stamp);
+	sprintf(filepath, "alert_%s.bmp", time_stamp);
 	FILE *fp = fopen(filepath, "wb");
 	if(!fp){
 		printf("Fail to open file %s\n", filepath);
