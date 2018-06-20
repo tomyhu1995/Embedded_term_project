@@ -5,7 +5,7 @@
 
 #include <mosquitto.h>
 
-#define mqtt_host "127.0.0.1"
+#define mqtt_host "140.113.216.71"
 #define mqtt_port 1883
 
 static int run = 1;
