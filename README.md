@@ -12,7 +12,7 @@ Embedded term project 2018 Spring, NCTU
 * ./mosquitto_sub -h \<broker IP\> -t \<topic name\>
 
 ## Where is the MQTT broker?
-I put MQTT broker on my ESXi machine(SDN_class_machine)
+192.168.1.1(on normal desktop)
 
 ## Reference
 * https://mosquitto.org/api/files/mosquitto-h.html#mosquitto_new
