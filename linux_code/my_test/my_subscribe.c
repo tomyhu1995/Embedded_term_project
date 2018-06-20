@@ -1,6 +1,7 @@
 #include <signal.h>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 
 #include <mosquitto.h>
 
@@ -22,7 +23,22 @@ void connect_callback(struct mosquitto *mosq, void *obj, int result)
 void message_callback(struct mosquitto *mosq, void *obj, const struct mosquitto_message *message)
 {
 //	printf("Enter message_callback\n");
-	printf("%s\n", message->payload);
+	time_t current_time = time(NULL);
+	struct tm *p_tm;
+	p_tm = gmtime(&current_time);
+	char time_stamp[100] = {0};
+	char filepath[200] = {0};
+	sprintf(time_stamp, "%d-%d-%d,%d:%d:%d", (p_tm->tm_year+1900), (p_tm->tm_mon+1), p_tm->tm_mday, p_tm->tm_hour+8, p_tm->tm_min, p_tm->tm_sec);
+	sprintf(filepath, "alert_%s.txt", time_stamp);
+	FILE *fp = fopen(filepath, "wb");
+	if(!fp){
+		printf("Fail to open file %s\n", filepath);
+		return;
+	}
+
+	fwrite(message->payload, 1, message->payloadlen, fp);
+	fclose(fp);
+	//printf("%s\n", message->payload);
 }
 
 int main(int argc, char *argv[])
